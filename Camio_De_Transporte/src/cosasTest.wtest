@@ -1,0 +1,27 @@
+import cosas.*
+
+describe "test de las cosas" {
+
+	method initialize() {
+		residuosRadioactivos.asignarPeso(30)
+		paqueteDeLadrillos.agregarLadrillos(15)
+		bateriaAntiAerea.cargarMisiles()
+		bumblebee.transformar()
+	}
+
+	test "residuos radioactivos embalados" {
+		embalajeDeSeguridad.embalar(residuosRadioactivos)
+		assert.that(embalajeDeSeguridad.peso() == 30)
+		assert.that(embalajeDeSeguridad.nivelPeligrosidad() == 100)
+	}
+
+	test "el contenedor Portuario lleno de cosas" {
+		contenedorPortuario.meterCosa(bumblebee)
+		contenedorPortuario.meterCosa(bateriaAntiAerea)
+		contenedorPortuario.meterCosa(paqueteDeLadrillos)
+		assert.that(contenedorPortuario.nivelPeligrosidad() == 100)
+		assert.that(contenedorPortuario.peso() == 1230)
+	}
+
+}
+
