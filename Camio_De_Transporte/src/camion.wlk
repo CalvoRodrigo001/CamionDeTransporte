@@ -4,13 +4,13 @@ object camion {
 	const property cosas = []
 	var pesoCarga = 0
 	
-	method cargar(cosa) {
-		cosas.add(cosa)
-		pesoCarga += cosa.peso()
+	method cargar(unaCosa) {
+		cosas.add(unaCosa)
+		pesoCarga += unaCosa.peso()
 	}
-	method descargar(cosa) {
-		cosas.remove(cosa)
-		pesoCarga -= cosa.peso()
+	method descargar(unaCosa) {
+		cosas.remove(unaCosa)
+		pesoCarga -= unaCosa.peso()
 	}
     method todoPesoPar(){
     	return cosas.all({cosa => cosa.peso().even()})
@@ -22,7 +22,8 @@ object camion {
     	return cosas.find({cosa => cosa.nivelPeligrosidad() == nivel})
     }
     method pesoTotal()=return pesoCarga + 1000
-    method excedidoDePeso()= self.pesoTotal()>2500
+    
+    method excedidoDePeso()= self.pesoTotal() > 2500
 
     method objetosQueSuperanPeligrosidad(nivel){
     	return cosas.filter({cosa => cosa.nivelPeligrosidad() > nivel})
@@ -31,10 +32,13 @@ object camion {
     	return cosas.filter({cosa => cosa.nivelPeligrosidad()>cosaAComparar.nivelPeligrosidad()})
     }
     method puedeCircularEnRuta(nivelMaximoPeligrosidad){
-    	return not (self.excedidoDePeso() and cosas.filter({self.objetosQueSuperanPeligrosidad(nivelMaximoPeligrosidad)}))
+    	return (self.excedidoDePeso() and not cosas.filter({self.objetosQueSuperanPeligrosidad(nivelMaximoPeligrosidad)}) > nivelMaximoPeligrosidad)
     }
     
     method tieneAlgoQuePesaEntre(min,max)=cosas.filter({cosa => cosa.peso().between(min,max)})
-    method cosaMasPesada()=cosas.find({cosas.max({cosa=> cosa.peso()})})
+    
+    method cosaMasPesada() = cosas.max({cosa=> cosa.peso()})
+    
     method pesos()=cosas.map({cosa=>cosa.peso()})
 }
+

@@ -1,6 +1,38 @@
+import cosas.*
+import camion.*
 
-test "testX" {
+describe "tests del camion" {
 
-	assert.that(true)
+	method initialize() {
+		arenaAGranel.asignarPeso(150)
+		bateriaAntiAerea.cargarMisiles()
+		paqueteDeLadrillos.agregarLadrillos(80)
+		embalajeDeSeguridad.embalar(paqueteDeLadrillos)
+		camion.cargar(arenaAGranel)
+		camion.cargar(bateriaAntiAerea)
+		camion.cargar(embalajeDeSeguridad)
+		camion.cargar(bumblebee)
+	}
+
+	test "camion no tiene sobrepeso" {
+		assert.that(!camion.excedidoDePeso())
+	}
+
+	test "el peso del camion esta balanceado" {
+		assert.that(camion.todoPesoPar())
+	}
+
+	test "el camion es muy peligroso para andar en la ruta" {
+		assert.that(!camion.puedeCircularEnRuta(80))
+	}
+
+	test "el camion tiene una cosa muy peligrosa" {
+		assert.that(camion.objetosQueSuperanPeligrosidad(80) == bateriaAntiAerea)
+	}
+
+	test "Bumblebee es la cosa más pesada del camion" {
+		assert.that(camion.cosaMasPesada() == bumblebee)
+	}
 
 }
+

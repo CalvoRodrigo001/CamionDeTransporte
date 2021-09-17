@@ -5,7 +5,6 @@ describe "test de las cosas" {
 	method initialize() {
 		residuosRadioactivos.asignarPeso(30)
 		paqueteDeLadrillos.agregarLadrillos(15)
-		bateriaAntiAerea.cargarMisiles()
 		bumblebee.transformar()
 	}
 
@@ -19,8 +18,17 @@ describe "test de las cosas" {
 		contenedorPortuario.meterCosa(bumblebee)
 		contenedorPortuario.meterCosa(bateriaAntiAerea)
 		contenedorPortuario.meterCosa(paqueteDeLadrillos)
+		contenedorPortuario.meterCosa(residuosRadioactivos)
+		assert.that(contenedorPortuario.nivelPeligrosidad() == 200)
+		assert.that(contenedorPortuario.peso() == 1160)
+	}
+
+	test "contenedor con embalaje" {
+		embalajeDeSeguridad.embalar(residuosRadioactivos)
+		contenedorPortuario.meterCosa(embalajeDeSeguridad)
+		contenedorPortuario.meterCosa(bateriaAntiAerea)
 		assert.that(contenedorPortuario.nivelPeligrosidad() == 100)
-		assert.that(contenedorPortuario.peso() == 1230)
+		assert.that(contenedorPortuario.peso() == 330)
 	}
 
 }
