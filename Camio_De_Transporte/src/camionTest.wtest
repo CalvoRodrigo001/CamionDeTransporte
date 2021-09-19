@@ -8,6 +8,7 @@ describe "tests del camion" {
 		bateriaAntiAerea.cargarMisiles()
 		paqueteDeLadrillos.agregarLadrillos(80)
 		embalajeDeSeguridad.embalar(paqueteDeLadrillos)
+		bumblebee.transformar()
 		camion.cargar(arenaAGranel)
 		camion.cargar(bateriaAntiAerea)
 		camion.cargar(embalajeDeSeguridad)
@@ -27,7 +28,7 @@ describe "tests del camion" {
 	}
 
 	test "el camion tiene una cosa muy peligrosa" {
-		assert.that(camion.objetosQueSuperanPeligrosidad(80) == bateriaAntiAerea)
+		assert.that(camion.objetosQueSuperanPeligrosidad(90) == [ bateriaAntiAerea ])
 	}
 
 	test "Bumblebee es la cosa más pesada del camion" {

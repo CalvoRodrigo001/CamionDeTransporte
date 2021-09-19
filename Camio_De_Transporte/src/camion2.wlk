@@ -32,8 +32,8 @@ object camion {
     	return cosas.filter({cosa => cosa.nivelPeligrosidad()>cosaAComparar.nivelPeligrosidad()})
     }
     method puedeCircularEnRuta(nivelMaximoPeligrosidad){
-    	return (self.excedidoDePeso() and not cosas.filter({self.objetosQueSuperanPeligrosidad(nivelMaximoPeligrosidad)}) > nivelMaximoPeligrosidad)
-    }
+    	return not self.excedidoDePeso() and not cosas.filter({self.objetosQueSuperanPeligrosidad(nivelMaximoPeligrosidad)}) > nivelMaximoPeligrosidad
+    	}
     
     method tieneAlgoQuePesaEntre(min,max)=cosas.filter({cosa => cosa.peso().between(min,max)})
     
