@@ -1,6 +1,9 @@
+import camion2.*
+import cosas2.*
 
-test "testX" {
-
-	assert.that(true)
-
+describe "tests bultos y consecuencias de carga"{
+	 method initialize(){
+	 	
+	 }
+	 test ""{}
 }
