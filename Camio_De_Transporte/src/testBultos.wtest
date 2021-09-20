@@ -1,9 +1,50 @@
 import camion2.*
 import cosas2.*
 
-describe "tests bultos y consecuencias de carga"{
-	 method initialize(){
-	 	
-	 }
-	 test ""{}
+describe "tests bultos y consecuencias de carga" {
+
+	method cargarTodo() {
+		camion.cargar(knightRider)
+		camion.cargar(bumblebee)
+		camion.cargar(paqueteDeLadrillos)
+		camion.cargar(arenaAGranel)
+		camion.cargar(bateriaAntiAerea)
+		camion.cargar(contenedorPortuario)
+		camion.cargar(residuosRadioactivos)
+		camion.cargar(embalajeDeSeguridad)
+	}
+
+	test "camion carga a bumblebee y a los residuos radioactivos (3 bultos)" {
+		camion.cargar(bumblebee)
+		camion.cargar(knightRider)
+		assert.equals(3, camion.totalBultos())
+	}
+
+	test "contenedor Portuario carga al embalaje de seguridad y a un paquete de ladrillos con 120 ladrillos(4 bultos)" {
+		paqueteDeLadrillos.agregarLadrillos(120)
+		contenedorPortuario.meterCosa(embalajeDeSeguridad)
+		contenedorPortuario.meterCosa(paqueteDeLadrillos)
+		assert.equals(5, contenedorPortuario.bulto())
+	}
+
+	test "camion carga al contenedorPortuario con bumblebee y la bateriaAntiAerea cargada con misiles adentro, más un paqueteDeLadrillos con 400 ladrillos(8 bultos) " {
+		paqueteDeLadrillos.agregarLadrillos(400)
+		bateriaAntiAerea.cargarMisiles()
+		contenedorPortuario.meterCosa(bumblebee)
+		contenedorPortuario.meterCosa(bateriaAntiAerea)
+		camion.cargar(contenedorPortuario)
+		camion.cargar(paqueteDeLadrillos)
+		assert.equals(8, camion.totalBultos())
+	}
+
+	test "camion carga todos las cosas(contendor Portuario Vacio,paquete De Ladrillos con 100 ladrillos, bateriaAntiAerea sin misiles) son 10 bultos" {
+		paqueteDeLadrillos.agregarLadrillos(100)
+		embalajeDeSeguridad.embalar(bumblebee)
+		arenaAGranel.asignarPeso(100)
+		residuosRadioactivos.asignarPeso(100)
+		self.cargarTodo()
+		assert.equals(10, camion.totalBultos())
+	}
+
 }
+

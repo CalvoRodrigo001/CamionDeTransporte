@@ -126,7 +126,7 @@ object contenedorPortuario {
 	method nivelPeligrosidad() = if (contenido.isEmpty()) 0 else contenido.max({ cosa => cosa.nivelPeligrosidad() }).nivelPeligrosidad()
 
 	// parte 2 bultos y consecuencias 
-	method bulto() = 1 + contenido.bulto({ cosa => cosa.buto() })
+	method bulto() = 1 + contenido.sum({ cosa => cosa.bulto() })
 
 }
 
