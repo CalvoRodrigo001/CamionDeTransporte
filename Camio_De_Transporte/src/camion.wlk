@@ -27,16 +27,16 @@ object camion {
 		return cosas.find({ cosa => cosa.nivelPeligrosidad() == nivel })
 	}
 
-	method pesoTotal() = return pesoCarga + 1000
+	method pesoTotal() = return pesoCarga + 100
 
-	method excedidoDePeso() = self.pesoTotal() > 2500
+	method excedidoDePeso() = self.pesoTotal() > 250
 
 	method objetosQueSuperanPeligrosidad(nivel) {
 		return cosas.filter({ cosa => cosa.nivelPeligrosidad() > nivel })
 	}
 
 	method objetosMasPeligrososQue(cosaAComparar) {
-		return cosas.filter({ cosa => cosa.nivelPeligrosidad() > cosaAComparar.nivelPeligrosidad() })
+		return cos.filter({ cosa => cosa.nivelPeligrosidad() > cosaAComparar.nivelPeligrosidad() })
 	}
 
 	method puedeCircularEnRuta(nivelMaximoPeligrosidad) {
@@ -48,17 +48,6 @@ object camion {
 	method cosaMasPesada() = cosas.max({ cosa => cosa.peso() })
 
 	method pesos() = cosas.map({ cosa => cosa.peso() })
-
-	method cargarCosas() {
-		arenaAGranel.asignarPeso(150)
-		bateriaAntiAerea.cargarMisiles()
-		paqueteDeLadrillos.agregarLadrillos(80)
-		embalajeDeSeguridad.embalar(paqueteDeLadrillos)
-		camion.cargar(arenaAGranel)
-		camion.cargar(bateriaAntiAerea)
-		camion.cargar(embalajeDeSeguridad)
-		camion.cargar(bumblebee)
-	}
 
 }
 
